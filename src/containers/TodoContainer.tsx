@@ -8,17 +8,17 @@ import Todo from 'components/Todo';
 
 const TodoContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const inputTitleProps = useInput();
-  const inputBodyProps = useInput();
+  const { reset: titleReset, ...inputTitleProps } = useInput();
+  const { reset: bodyReset, ...inputBodyProps } = useInput();
 
-  const handleSubmit = useCallback(() => {
-    dispatch(
-      todo.add({
-        title: inputTitleProps.value,
-        body: inputBodyProps.value,
-      }),
-    );
-  }, [inputTitleProps.value, inputBodyProps.value]);
+  const handleSubmit = useCallback(
+    (title: string, body: string) => {
+      dispatch(todo.add({ title, body }));
+      titleReset();
+      bodyReset();
+    },
+    [dispatch],
+  );
 
   const todos = useSelector(getTodos);
 

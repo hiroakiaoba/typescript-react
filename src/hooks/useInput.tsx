@@ -10,7 +10,11 @@ const useInput = (defaultVaue: string = '') => {
     [value],
   );
 
-  return { value, onChange };
+  const reset = useCallback(() => {
+    setValue(defaultVaue);
+  }, []);
+
+  return { reset, value, onChange };
 };
 
 export default useInput;

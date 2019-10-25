@@ -9,7 +9,7 @@ export interface FormProps {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
-  handleSubmit: () => void;
+  handleSubmit: (title: string, body: string) => void;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -31,7 +31,12 @@ const Form: React.FC<FormProps> = ({
           <input id="body" type="text" {...inputBodyProps} />
         </label>
       </div>
-      <button type="button" onClick={handleSubmit}>
+      <button
+        type="button"
+        onClick={() =>
+          handleSubmit(inputTitleProps.value, inputBodyProps.value)
+        }
+      >
         Add
       </button>
     </>

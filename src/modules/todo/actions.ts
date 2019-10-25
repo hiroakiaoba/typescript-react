@@ -10,7 +10,7 @@ export const actionTypes = {
 
 /* actionCreators */
 export const todo = {
-  add: (params: Omit<Todo, 'id'>) => ({
+  add: (params: Omit<Todo, 'id' | 'status'>) => ({
     type: actionTypes.ADD,
     payload: { params },
   }),
