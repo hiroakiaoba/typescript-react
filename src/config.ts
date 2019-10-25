@@ -6,6 +6,7 @@ const commonConfig = {
   timeoutMsec: 7000,
   pageTitle: 'godspeed portal excel',
   localstrageTokenKey: '',
+  apiUrl: '',
 };
 
 const developmentConfig = {

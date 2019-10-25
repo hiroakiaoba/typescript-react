@@ -17,6 +17,8 @@ const Form: React.FC<FormProps> = ({
   inputBodyProps,
   handleSubmit,
 }) => {
+  console.log('form rendering!!!');
+
   return (
     <>
       <div>

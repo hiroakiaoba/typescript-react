@@ -8,7 +8,7 @@ import rootReducer from './modules/reducer';
 import rootSaga from './modules/saga';
 import App from './App';
 
-import './styles/reset.css';
+import './reset.css';
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
 const composeEnhancers =

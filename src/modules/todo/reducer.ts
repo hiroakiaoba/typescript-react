@@ -33,7 +33,7 @@ const reducer: Reducer<TodoState, TodoAction> = (
       const id = length > 0 ? state.todos[length - 1].id + 1 : 1;
       const newTodo: Todo = Object.assign(
         {},
-        { id, status: 'NEW' },
+        { id, status: 'NEW' } as const,
         action.payload.params,
       );
 

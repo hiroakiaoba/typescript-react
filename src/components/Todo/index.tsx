@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { Todo } from 'services/models';
 import Form, { FormProps } from './Form';
