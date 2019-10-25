@@ -2,7 +2,7 @@ import React from 'react';
 import { InputProps } from 'src/hooks/useInput';
 
 export interface FormProps {
-  inputTitleProps: InputProps;
+  inputTitleProps: { attrs: InputProps; errorMessage: string };
   inputBodyProps: InputProps;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -19,7 +19,10 @@ const Form: React.FC<FormProps> = ({
       <div>
         <label htmlFor="title">
           title:
-          <input id="title" type="text" {...inputTitleProps} />
+          <input id="title" type="text" {...inputTitleProps.attrs} />
+          {inputTitleProps.errorMessage && (
+            <p>{inputTitleProps.errorMessage}</p>
+          )}
         </label>
       </div>
       <div>
