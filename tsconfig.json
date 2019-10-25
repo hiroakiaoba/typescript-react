@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "esnext",
+    "target": "es5",
+    "jsx": "react",
+    "lib": ["es2018", "dom"],
+    "moduleResolution": "node",
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ],
+    "paths": {
+      "src/*": ["src/*"],
+      "components/*": ["src/components/*"],
+      "containers/*": ["src/containers/*"],
+      "modules/*": ["src/modules/*"],
+      "services/*": ["src/services/*"]
+    }
+  },
+  "include": ["./src/**/*", "./types/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
