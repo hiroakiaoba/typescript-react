@@ -94,6 +94,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.5.0",
     "axios": "^0.18.0",
     "camelcase-keys": "^6.0.1",
     "fast-deep-equal": "^2.0.1",
