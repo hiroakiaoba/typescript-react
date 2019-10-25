@@ -12,12 +12,15 @@ const TodoContainer: React.FC = () => {
   const { reset: bodyReset, ...inputBodyProps } = useInput();
 
   const handleSubmit = useCallback(
-    (title: string, body: string) => {
-      dispatch(todo.add({ title, body }));
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(
+        todo.add({ title: inputTitleProps.value, body: inputBodyProps.value }),
+      );
       titleReset();
       bodyReset();
     },
-    [dispatch],
+    [dispatch, inputTitleProps.value, inputBodyProps.value],
   );
 
   const todos = useSelector(getTodos);

@@ -17,6 +17,6 @@ const useInput = (defaultVaue: string = '') => {
   return { reset, value, onChange };
 };
 
-export type InputType = Omit<ReturnType<typeof useInput>, 'reset'>;
+export type InputProps = Omit<ReturnType<typeof useInput>, 'reset'>;
 
 export default useInput;

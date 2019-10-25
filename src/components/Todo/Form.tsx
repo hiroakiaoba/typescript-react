@@ -1,15 +1,10 @@
 import React from 'react';
+import { InputProps } from 'src/hooks/useInput';
 
 export interface FormProps {
-  inputTitleProps: {
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  };
-  inputBodyProps: {
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  };
-  handleSubmit: (title: string, body: string) => void;
+  inputTitleProps: InputProps;
+  inputBodyProps: InputProps;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -20,7 +15,7 @@ const Form: React.FC<FormProps> = ({
   console.log('form rendering!!!');
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="title">
           title:
@@ -33,15 +28,8 @@ const Form: React.FC<FormProps> = ({
           <input id="body" type="text" {...inputBodyProps} />
         </label>
       </div>
-      <button
-        type="button"
-        onClick={() =>
-          handleSubmit(inputTitleProps.value, inputBodyProps.value)
-        }
-      >
-        Add
-      </button>
-    </>
+      <button type="submit">Add</button>
+    </form>
   );
 };
 
