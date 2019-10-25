@@ -3,7 +3,7 @@ import { InputProps } from 'src/hooks/useInput';
 
 export interface FormProps {
   inputTitleProps: { attrs: InputProps; errorMessage: string };
-  inputBodyProps: InputProps;
+  inputBodyProps: { attrs: InputProps; errorMessage: string };
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -12,8 +12,6 @@ const Form: React.FC<FormProps> = ({
   inputBodyProps,
   handleSubmit,
 }) => {
-  console.log('form rendering!!!');
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -28,7 +26,8 @@ const Form: React.FC<FormProps> = ({
       <div>
         <label htmlFor="body">
           body:
-          <input id="body" type="text" {...inputBodyProps} />
+          <input id="body" type="text" {...inputBodyProps.attrs} />
+          {inputBodyProps.errorMessage && <p>{inputBodyProps.errorMessage}</p>}
         </label>
       </div>
       <button type="submit">Add</button>

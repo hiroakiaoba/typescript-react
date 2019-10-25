@@ -11,29 +11,28 @@ import Todo from 'components/Todo';
 const TodoContainer: React.FC = () => {
   const dispatch = useDispatch();
   const { reset: titleReset, ...titleProps } = useInput();
-  const { reset: bodyReset, ...inputBodyProps } = useInput();
-  const { errorMessage: titleError, validate: validateTitle } = useValidation(
-    required,
-  );
-
-  const inputTitleProps = {
-    attrs: titleProps,
-    errorMessage: titleError,
-  };
+  const { reset: bodyReset, ...bodyProps } = useInput();
+  const [titleErrorMessage, validateTitle] = useValidation(required);
+  const [bodyErrorMessage, validateBody] = useValidation(required);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      validateTitle(titleProps.value);
-      if (titleError) {
-        dispatch(
-          todo.add({ title: titleProps.value, body: inputBodyProps.value }),
-        );
+      const isValidTitle = validateTitle(titleProps.value);
+      const isValidBody = validateBody(bodyProps.value);
+      if (isValidTitle && isValidBody) {
+        dispatch(todo.add({ title: titleProps.value, body: bodyProps.value }));
         titleReset();
         bodyReset();
       }
     },
-    [dispatch, titleProps.value, inputBodyProps.value, titleError],
+    [
+      dispatch,
+      titleProps.value,
+      bodyProps.value,
+      titleErrorMessage,
+      bodyErrorMessage,
+    ],
   );
 
   const todos = useSelector(getTodos);
@@ -41,8 +40,8 @@ const TodoContainer: React.FC = () => {
   return (
     <Todo
       todos={todos}
-      inputTitleProps={inputTitleProps}
-      inputBodyProps={inputBodyProps}
+      inputTitleProps={{ attrs: titleProps, errorMessage: titleErrorMessage }}
+      inputBodyProps={{ attrs: bodyProps, errorMessage: bodyErrorMessage }}
       handleSubmit={handleSubmit}
     />
   );
