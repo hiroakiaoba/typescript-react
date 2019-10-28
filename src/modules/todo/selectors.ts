@@ -1,14 +1,26 @@
 import { RootState } from 'modules/reducer';
 import { createSelector } from 'reselect';
+import { FilterCondition, Todo } from 'services/models';
 
-export const todosSelector = (state: RootState) => state.todo.todos;
+const todosSelector = (state: RootState) => state.todo.todos;
+const conditionSelector = (
+  state: RootState,
+  filterCondition: FilterCondition,
+) => filterCondition;
 
-export const convertedTodosSelector = createSelector(
+export const selectTodosWithCondition = createSelector(
   todosSelector,
-  todos =>
-    todos.map(t => ({
-      ...t,
-      title: `${t.title}@title`,
-      body: `${t.body}@body`,
-    })),
+  conditionSelector,
+  (todos: Todo[], filterCondition: FilterCondition) => {
+    switch (filterCondition) {
+      case 'ALL':
+        return todos;
+      case 'COMPLETED':
+        return todos.filter(todo => todo.completed === true);
+      case 'NOT_COMPLETED':
+        return todos.filter(todo => todo.completed === false);
+      default:
+        return todos;
+    }
+  },
 );

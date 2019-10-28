@@ -1,19 +1,25 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from 'src/hooks/useInput';
 import useValidation from 'src/hooks/useValidation';
 import { todo } from 'modules/todo/actions';
-import { convertedTodosSelector } from 'modules/todo/selectors';
+import { selectTodosWithCondition } from 'modules/todo/selectors';
 import { required } from 'services/validation';
+import { FilterCondition } from 'services/models';
 
 import Todo from 'components/Todo';
+import { RootState } from 'src/modules/reducer';
 
 const TodoContainer: React.FC = () => {
-  const dispatch = useDispatch();
   const { reset: titleReset, ...titleProps } = useInput();
   const { reset: bodyReset, ...bodyProps } = useInput();
   const [titleErrorMessage, validateTitle] = useValidation(required);
   const [bodyErrorMessage, validateBody] = useValidation(required);
+  const [filterCondition, changeFilterCondition] = useState<FilterCondition>(
+    'ALL',
+  );
+
+  const dispatch = useDispatch();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,7 +45,13 @@ const TodoContainer: React.FC = () => {
     dispatch(todo.toggleStatus({ id }));
   }, []);
 
-  const todos = useSelector(convertedTodosSelector);
+  const handleFilterTodos = useCallback((condition: FilterCondition) => {
+    changeFilterCondition(condition);
+  }, []);
+
+  const todos = useSelector((state: RootState) =>
+    selectTodosWithCondition(state, filterCondition),
+  );
 
   return (
     <Todo
@@ -48,6 +60,7 @@ const TodoContainer: React.FC = () => {
       inputBodyProps={{ attrs: bodyProps, errorMessage: bodyErrorMessage }}
       handleSubmit={handleSubmit}
       handleToggleStatus={handleToggleStatus}
+      handleFilterTodos={handleFilterTodos}
     />
   );
 };

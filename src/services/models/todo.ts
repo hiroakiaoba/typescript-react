@@ -4,3 +4,5 @@ export interface Todo {
   body: string;
   completed: boolean;
 }
+
+export type FilterCondition = 'ALL' | 'COMPLETED' | 'NOT_COMPLETED';
