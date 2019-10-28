@@ -16,7 +16,7 @@ const TodoList: React.FC<TodoListProps> = React.memo(
     return (
       <>
         <h3>todo list</h3>
-        <ul>
+        <Ul>
           {todos.map(todo => (
             <li key={todo.id}>
               <Item completed={todo.completed}>
@@ -27,7 +27,7 @@ const TodoList: React.FC<TodoListProps> = React.memo(
               </button>
             </li>
           ))}
-        </ul>
+        </Ul>
       </>
     );
   },
@@ -40,6 +40,9 @@ const TodoList: React.FC<TodoListProps> = React.memo(
   },
 );
 
+const Ul = styled.ul`
+  list-style: none;
+`;
 const Item = styled.span<{ completed: boolean }>`
   text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
 `;
