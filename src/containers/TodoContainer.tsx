@@ -35,6 +35,10 @@ const TodoContainer: React.FC = () => {
     ],
   );
 
+  const handleToggleStatus = useCallback((id: number) => {
+    dispatch(todo.toggleStatus({ id }));
+  }, []);
+
   const todos = useSelector(convertedTodosSelector);
 
   return (
@@ -43,6 +47,7 @@ const TodoContainer: React.FC = () => {
       inputTitleProps={{ attrs: titleProps, errorMessage: titleErrorMessage }}
       inputBodyProps={{ attrs: bodyProps, errorMessage: bodyErrorMessage }}
       handleSubmit={handleSubmit}
+      handleToggleStatus={handleToggleStatus}
     />
   );
 };

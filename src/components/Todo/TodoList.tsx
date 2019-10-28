@@ -4,8 +4,13 @@ import equal from 'fast-deep-equal';
 
 import { Todo } from 'services/models';
 
-const TodoList: React.FC<{ todos: Todo[] }> = React.memo(
-  ({ todos }) => {
+export interface TodoListProps {
+  todos: Todo[];
+  handleToggleStatus: (id: number) => void;
+}
+
+const TodoList: React.FC<TodoListProps> = React.memo(
+  ({ todos, handleToggleStatus }) => {
     console.log('todo list rendering!!');
 
     return (
@@ -14,7 +19,12 @@ const TodoList: React.FC<{ todos: Todo[] }> = React.memo(
         <ul>
           {todos.map(todo => (
             <li key={todo.id}>
-              {todo.title}/{todo.body}
+              <Item completed={todo.completed}>
+                {todo.title}/{todo.body}
+              </Item>
+              <button type="button" onClick={() => handleToggleStatus(todo.id)}>
+                toggle status
+              </button>
             </li>
           ))}
         </ul>
@@ -29,5 +39,9 @@ const TodoList: React.FC<{ todos: Todo[] }> = React.memo(
     return false;
   },
 );
+
+const Item = styled.span<{ completed: boolean }>`
+  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
+`;
 
 export default TodoList;

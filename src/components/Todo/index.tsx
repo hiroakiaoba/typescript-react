@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Todo } from 'services/models';
 import Form, { FormProps } from './Form';
-import TodoList from './TodoList';
+import TodoList, { TodoListProps } from './TodoList';
 
-type TodoProps = { todos: Todo[] } & FormProps;
+type TodoProps = TodoListProps & FormProps;
 
 const TodoComponent: React.FC<TodoProps> = ({
   todos,
+  handleToggleStatus,
   inputTitleProps,
   inputBodyProps,
   handleSubmit,
@@ -15,7 +15,7 @@ const TodoComponent: React.FC<TodoProps> = ({
   return (
     <>
       <Form {...{ inputTitleProps, inputBodyProps, handleSubmit }} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} handleToggleStatus={handleToggleStatus} />
     </>
   );
 };
