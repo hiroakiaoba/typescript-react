@@ -4,18 +4,18 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    color: theme.status.danger,
-    '&$checked': {
-      color: theme.status.danger,
-    },
-  },
-  checked: {},
-}));
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     color: theme.status.danger,
+//     '&$checked': {
+//       color: theme.status.danger,
+//     },
+//   },
+//   checked: {},
+// }));
 
 const Sample: React.FC = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>
@@ -26,10 +26,10 @@ const Sample: React.FC = () => {
         </Button>
       </Section>
       <Checkbox
-        classes={{
-          root: classes.root,
-          checked: classes.checked,
-        }}
+        // classes={{
+        //   root: classes.root,
+        //   checked: classes.checked,
+        // }}
       />
     </>
   );

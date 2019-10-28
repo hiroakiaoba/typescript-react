@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useInput, { InputProps } from 'src/hooks/useInput';
+import useInput from 'src/hooks/useInput';
 import useValidation from 'src/hooks/useValidation';
 import { todo } from 'modules/todo/actions';
 import { getTodos } from 'modules/todo/selectors';
