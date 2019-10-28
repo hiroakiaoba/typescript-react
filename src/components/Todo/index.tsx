@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FilterCondition } from 'services/models';
-
 import Form, { FormProps } from './Form';
+import FilterButtons, { FilterButtonsProps } from './FilterButtons';
 import TodoList, { TodoListProps } from './TodoList';
 
-type TodoProps = TodoListProps &
-  FormProps & {
-    handleFilterTodos: (condition: FilterCondition) => void;
-  };
+type TodoProps = TodoListProps & FormProps & FilterButtonsProps;
 
 const TodoComponent: React.FC<TodoProps> = ({
   todos,
@@ -25,19 +21,7 @@ const TodoComponent: React.FC<TodoProps> = ({
         <Form {...{ inputTitleProps, inputBodyProps, handleSubmit }} />
       </Section>
       <Section>
-        filter:
-        <button type="button" onClick={() => handleFilterTodos('ALL')}>
-          show all
-        </button>
-        <button type="button" onClick={() => handleFilterTodos('COMPLETED')}>
-          completed
-        </button>
-        <button
-          type="button"
-          onClick={() => handleFilterTodos('NOT_COMPLETED')}
-        >
-          not completed
-        </button>
+        <FilterButtons {...{ handleFilterTodos }} />
       </Section>
       <Section>
         <TodoList {...{ todos, handleToggleStatus }} />
