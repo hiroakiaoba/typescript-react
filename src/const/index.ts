@@ -1,5 +1,5 @@
 import Color from './Color';
 import Size from './Size';
-import MaterialTheme from './MaterialTheme';
+import Theme from './Theme';
 
-export { Color, Size, MaterialTheme };
+export { Color, Size, Theme };

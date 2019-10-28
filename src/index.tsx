@@ -4,8 +4,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { MaterialTheme } from 'src/const';
+import {
+  ThemeProvider as MaterialThemeProvider,
+  StylesProvider,
+} from '@material-ui/styles';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { Theme } from 'src/const';
 import rootReducer from './modules/reducer';
 import rootSaga from './modules/saga';
 import App from './App';
@@ -27,11 +31,15 @@ export const store = createStore(rootReducer, enhancer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={MaterialTheme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <StylesProvider injectFirst>
+      <MaterialThemeProvider theme={Theme}>
+        <StyledThemeProvider theme={Theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </StyledThemeProvider>
+      </MaterialThemeProvider>
+    </StylesProvider>
   </Provider>,
   document.getElementById('root') as HTMLElement,
 );
