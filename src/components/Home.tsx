@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import Layout from 'components/Layout';
 import Todo from 'containers/TodoContainer';
-import Profile from 'components/Profile';
 import Sample from 'components/Sample';
 
 const Home: React.FC = () => {
@@ -14,12 +13,10 @@ const Home: React.FC = () => {
       <Main>
         <LinkList>
           <NavLink to="/todo">todo page</NavLink>
-          <NavLink to="/profile">profile page</NavLink>
           <NavLink to="/sample">sample page</NavLink>
         </LinkList>
         <Switch>
           <Route path="/todo" component={Todo} />
-          <Route path="/profile" component={Profile} />
           <Route path="/sample" component={Sample} />
         </Switch>
       </Main>
