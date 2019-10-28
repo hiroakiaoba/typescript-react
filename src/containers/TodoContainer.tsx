@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useInput from 'src/hooks/useInput';
 import useValidation from 'src/hooks/useValidation';
 import { todo } from 'modules/todo/actions';
-import { getTodos } from 'modules/todo/selectors';
+import { convertedTodosSelector } from 'modules/todo/selectors';
 import { required } from 'services/validation';
 
 import Todo from 'components/Todo';
@@ -35,7 +35,7 @@ const TodoContainer: React.FC = () => {
     ],
   );
 
-  const todos = useSelector(getTodos);
+  const todos = useSelector(convertedTodosSelector);
 
   return (
     <Todo
